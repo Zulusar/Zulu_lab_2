@@ -22,6 +22,7 @@ export const game: {
         //  обновляет current и возвращает true, иначе возвращает false
         // Нужно учесть, что если вызывалась функция toStep, то 
         //  current можно указывать не на последний элемент steps
+
         return true
     },
     toStep: function (step: number): boolean {
@@ -35,6 +36,12 @@ export const game: {
         // TODO
         // Возвращает "Ничья", "Победил 0", "Победил X" или "Идет игра"
         //  в зависимости от ситуации на доске
-        return "Идет игра"
+        board.isFill()
+        board.checkWin()
+        if(board.isFill() == false && board.checkWin() == "_")
+            return "Идет игра"
+        if(board.checkWin() != "_")
+            return `Победил ${board.checkWin()}`
+        else return "Ничья"
     }
 }
