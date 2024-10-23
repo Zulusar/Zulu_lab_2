@@ -72,14 +72,15 @@ export const board: {
         // Если имеется комбинация из трех одинаковых символов "X" или "0" 
         //  в линию - возвращает этот символ
         // Иначе возвращает символ "_"
-        let count = 0
+        //let count = 0
         //let data: Cell
         for(let i = 0; i < this.winPos.length; i++){
-            if(this.getLineChar(this.winPos[i])[0] == this.getLineChar(this.winPos[i])[1] && this.getLineChar(this.winPos[i])[0] == this.getLineChar(this.winPos[i])[2]){
-                count++
-                data = this.getLineChar(this.winPos[i])[0]
+            if(this.cells[this.winPos[i][0]] == this.cells[this.winPos[i][1]] && this.cells[this.winPos[i][1]] == this.cells[this.winPos[i][2]]){
+                //count++
+                data = this.cells[this.winPos[i][0]]
+                break
             }
-            else data = "_"     
+            else  data      
         }
         return data
     },

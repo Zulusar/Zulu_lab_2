@@ -14,7 +14,7 @@ export const game: {
 } = {
     // TODO
     // Необходимо инициализировать steps массивом с пустой доской
-    steps: [], 
+    steps: [] = Array.of(board.cells), 
     current: 0,
     move: function (index: number): boolean {
         // TODO
@@ -33,8 +33,10 @@ export const game: {
             board.move(index, symbol)
             this.steps.push(board.cells)
             this.current++
+            this.toStep
+            return true
         }
-        return true
+        
     },
 
     toStep: function (step: number): boolean {
@@ -44,7 +46,7 @@ export const game: {
         // Делает current равным step и обновляет свойство cell в board
         if (this.steps.length>step) {
             this.current = step
-            board.cells = this.steps[step]
+            board.cells == this.steps[step]
             return true
         }
         else return false
@@ -60,6 +62,7 @@ export const game: {
             return "Идет игра"
         if(board.checkWin() != "_")
             return `Победил ${board.checkWin()}`
+            //return "Победил Х"
         else return "Ничья"
     }
 }
