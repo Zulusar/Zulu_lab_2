@@ -4,6 +4,7 @@ import { board, Cells, Cell } from "./board"
 //  и номер текущей позиции в этом списке (current).
 
 let symbol:Cell
+var newBoard: Cells 
 
 export const game: {
     "steps": Cells[],
@@ -14,7 +15,7 @@ export const game: {
 } = {
     // TODO
     // Необходимо инициализировать steps массивом с пустой доской
-    steps: [] = Array.of(board.cells), 
+    steps: [] = [board.cells], 
     current: 0,
     move: function (index: number): boolean {
         // TODO
@@ -28,10 +29,12 @@ export const game: {
         this.checkStatus()
         if(this.checkStatus() == `Победил ${board.checkWin()}` || this.checkStatus() == "Ничья") return false
         else{
+            
             if(this.current%2 == 0) symbol = "X"
             if(this.current%2 != 0) symbol = "0"
             board.move(index, symbol)
-            this.steps.push(board.cells)
+            newBoard = structuredClone(board.cells)
+            this.steps.push(newBoard)
             this.current++
             this.toStep
             return true
@@ -44,12 +47,15 @@ export const game: {
         // Проверяет, что в steps есть элемент с индексом step,
         //  если нет то возвращает false
         // Делает current равным step и обновляет свойство cell в board
-        if (this.steps.length>step) {
+        if (this.steps.length<step) {
+            return false
+        }
+        else {
             this.current = step
-            board.cells == this.steps[step]
+            board.cells = structuredClone(this.steps[step])
             return true
         }
-        else return false
+
     },
 
     checkStatus: function (): string {
