@@ -4,7 +4,8 @@ import { board, Cells, Cell } from "./board"
 //  и номер текущей позиции в этом списке (current).
 
 let symbol:Cell
-var newBoard: Cells 
+var newBoard: Cells = ["_", "_", "_", "_", "_", "_", "_", "_", "_"]
+let newCurrent: number
 
 export const game: {
     "steps": Cells[],
@@ -15,7 +16,7 @@ export const game: {
 } = {
     // TODO
     // Необходимо инициализировать steps массивом с пустой доской
-    steps: [] = [board.cells], 
+    steps: [] = [newBoard], 
     current: 0,
     move: function (index: number): boolean {
         // TODO
@@ -51,7 +52,8 @@ export const game: {
             return false
         }
         else {
-            this.current = step
+            newCurrent = step
+            this.current =newCurrent //как очистить список ходов???
             board.cells = structuredClone(this.steps[step])
             return true
         }
