@@ -75,14 +75,14 @@ export const board: {
         //let count = 0
         //let data: Cell
         for(let i = 0; i < this.winPos.length; i++){
-            if(this.cells[this.winPos[i][0]] == this.cells[this.winPos[i][1]] && this.cells[this.winPos[i][1]] == this.cells[this.winPos[i][2]]){
-                //count++
+            if (this.cells[this.winPos[i][0]] == this.cells[this.winPos[i][1]]  && this.cells[this.winPos[i][0]] == this.cells[this.winPos[i][2]]&& this.cells[this.winPos[i][0]] != "_") {
                 data = this.cells[this.winPos[i][0]]
                 break
             }
-            else  data      
+            else  data = "_"   
         }
-        return data
+        if(data!= "_") return data
+        else return "_"
     },
 
     "winPos": [
