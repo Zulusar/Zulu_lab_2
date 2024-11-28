@@ -27,20 +27,20 @@ export const game: {
         //  обновляет current и возвращает true, иначе возвращает false
         // Нужно учесть, что если вызывалась функция toStep, то 
         //  current можно указывать не на последний элемент steps
-        this.checkStatus()
+        symbol = "X"
+        if(this.current%2 == 0) symbol = "X"
+        if(this.current%2 != 0) symbol = "0"
         if(this.checkStatus() == `Победил ${board.checkWin()}` || this.checkStatus() == "Ничья") return false
+        if(board.move(index, symbol) == false) return false
         else{
-            
-            if(this.current%2 == 0) symbol = "X"
-            if(this.current%2 != 0) symbol = "0"
             board.move(index, symbol)
+            
             newBoard = structuredClone(board.cells)
             this.steps.push(newBoard)
             this.current++
             this.toStep
             return true
-        }
-        
+        } 
     },
 
     toStep: function (step: number): boolean {
@@ -53,7 +53,7 @@ export const game: {
         }
         else {
             newCurrent = step
-            this.current =newCurrent //как очистить список ходов???
+            this.current = newCurrent 
             board.cells = structuredClone(this.steps[step])
             return true
         }
@@ -70,7 +70,6 @@ export const game: {
             return "Идет игра"
         if(board.checkWin() != "_")
             return `Победил ${board.checkWin()}`
-            //return "Победил Х"
         else return "Ничья"
     }
 }

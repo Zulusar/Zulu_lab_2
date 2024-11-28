@@ -52,7 +52,7 @@ export const board: {
         return (count == 0)? true : false
     },
 
-    move(index: number, cell: Cell) {
+    move(index: number, cell: Cell): boolean {
         // TODO
         // Если ячейка this.cell[index] занята - возвращает false
         // Записывает в ячейку cell и возвращает true
@@ -72,18 +72,17 @@ export const board: {
         // Если имеется комбинация из трех одинаковых символов "X" или "0" 
         //  в линию - возвращает этот символ
         // Иначе возвращает символ "_"
-        //let count = 0
-        //let data: Cell
+        let data = "_"
         for(let i = 0; i < this.winPos.length; i++){
-            if (this.cells[this.winPos[i][0]] == this.cells[this.winPos[i][1]]  && this.cells[this.winPos[i][0]] == this.cells[this.winPos[i][2]]&& this.cells[this.winPos[i][0]] != "_") {
-                data = this.cells[this.winPos[i][0]]
+            if (this.getLineChar(this.winPos[i])[0] == this.getLineChar(this.winPos[i])[1]  && this.getLineChar(this.winPos[i])[0] == this.getLineChar(this.winPos[i])[2]&& this.getLineChar(this.winPos[i])[0] != "_") {
+                data = this.getLineChar(this.winPos[i])[0]
                 break
             }
             else  data = "_"   
         }
-        if(data!= "_") return data
-        else return "_"
-    },
+        return data as Cell
+    }
+    ,
 
     "winPos": [
         [0, 1, 2],
